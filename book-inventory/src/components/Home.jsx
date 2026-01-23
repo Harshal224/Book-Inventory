@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getBooks } from "../services/bookService";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBooks().then(res => setBooks(res.data));
@@ -11,9 +13,7 @@ function Home() {
   return (
     <div className="container mt-4">
       <h4>Book Inventory</h4>
-      <p className="text-muted">
-        Manage your book collection
-      </p>
+      <p className="text-muted">Manage your book collection</p>
 
       <div className="card mt-3">
         <div
@@ -30,7 +30,11 @@ function Home() {
             </thead>
             <tbody>
               {books.map(book => (
-                <tr key={book.id}>
+                <tr
+                  key={book.id}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/books/${book.id}`)}
+                >
                   <td>{book.title}</td>
                   <td>{book.author}</td>
                   <td>{book.publisher}</td>
