@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getBooks } from "../services/bookService";
 import { useNavigate } from "react-router-dom";
+import BookForm from "../components/BookForm";
+
 
 function Home() {
   const [books, setBooks] = useState([]);
@@ -44,7 +46,12 @@ function Home() {
           </table>
         </div>
       </div>
+      <BookForm onBookAdded={() => {
+        getBooks().then(res => setBooks(res.data));
+      }} />
+
     </div>
+
   );
 }
 
