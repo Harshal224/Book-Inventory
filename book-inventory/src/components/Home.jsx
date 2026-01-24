@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getBooks } from "../services/bookService";
 import { useNavigate } from "react-router-dom";
 import BookForm from "../components/BookForm";
+import { deleteBook } from "../services/bookService";
 
 
 function Home() {
@@ -28,21 +29,38 @@ function Home() {
                 <th>Title</th>
                 <th>Author</th>
                 <th>Publisher</th>
+                <th>Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {books.map(book => (
-                <tr
-                  key={book.id}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/books/${book.id}`)}
-                >
-                  <td>{book.title}</td>
+                <tr key={book.id}>
+                  <td
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate(`/books/${book.id}`)}
+                  >
+                    {book.title}
+                  </td>
                   <td>{book.author}</td>
                   <td>{book.publisher}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteBook(book.id).then(() =>
+                          getBooks().then(res => setBooks(res.data))
+                        );
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
+
           </table>
         </div>
       </div>
