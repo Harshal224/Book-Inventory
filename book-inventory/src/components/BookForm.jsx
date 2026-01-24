@@ -22,6 +22,7 @@ function BookForm({ selectedBook, onSuccess, clearSelection }) {
     }
   }, [selectedBook]);
 
+
   const handleChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
@@ -95,10 +96,23 @@ function BookForm({ selectedBook, onSuccess, clearSelection }) {
             <button
               type="button"
               className="btn btn-secondary ms-2"
-              onClick={clearSelection}
+              onClick={() => {
+                clearSelection();
+                setBook({
+                  title: "",
+                  author: "",
+                  publisher: "",
+                  publishedDate: "",
+                  age: "",
+                  email: "",
+                  description: ""
+                });
+                setErrors({});
+              }}
             >
               Cancel
             </button>
+
           )}
         </form>
       </div>
