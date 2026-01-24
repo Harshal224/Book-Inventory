@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { addBook } from "../services/bookService";
+import { useEffect, useState } from "react";
+import { addBook, updateBook } from "../services/bookService";
 import { validateBook } from "../utils/validation";
 
-function BookForm({ onBookAdded }) {
+function BookForm({ selectedBook, onSuccess, clearSelection }) {
   const [book, setBook] = useState({
     title: "",
     author: "",
@@ -15,6 +15,13 @@ function BookForm({ onBookAdded }) {
 
   const [errors, setErrors] = useState({});
 
+  // Populate form when editing
+  useEffect(() => {
+    if (selectedBook) {
+      setBook(selectedBook);
+    }
+  }, [selectedBook]);
+
   const handleChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
@@ -23,13 +30,19 @@ function BookForm({ onBookAdded }) {
     e.preventDefault();
 
     const validationErrors = validateBook(book);
-    if (Object.keys(validationErrors).length > 0) {
+    if (Object.keys(validationErrors).length) {
       setErrors(validationErrors);
       return;
     }
 
-    await addBook(book);
-    onBookAdded();
+    if (book.id) {
+      await updateBook(book.id, book);
+    } else {
+      await addBook(book);
+    }
+
+    onSuccess();
+    clearSelection();
     setBook({
       title: "",
       author: "",
@@ -45,7 +58,7 @@ function BookForm({ onBookAdded }) {
   return (
     <div className="card mb-4">
       <div className="card-body">
-        <h5>Add New Book</h5>
+        <h5>{book.id ? "Edit Book" : "Add New Book"}</h5>
 
         <form onSubmit={handleSubmit}>
           <input className="form-control mb-2" name="title" placeholder="Title"
@@ -74,7 +87,19 @@ function BookForm({ onBookAdded }) {
             placeholder="Description"
             value={book.description} onChange={handleChange} />
 
-          <button className="btn btn-primary mt-2">Add Book</button>
+          <button className="btn btn-primary">
+            {book.id ? "Update Book" : "Add Book"}
+          </button>
+
+          {book.id && (
+            <button
+              type="button"
+              className="btn btn-secondary ms-2"
+              onClick={clearSelection}
+            >
+              Cancel
+            </button>
+          )}
         </form>
       </div>
     </div>

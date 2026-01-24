@@ -12,3 +12,6 @@ export const addBook = (book) =>
 
 export const deleteBook = (id) =>
   axios.delete(`${API_URL}/${id}`);
+
+export const updateBook = (id, book) =>
+  axios.put(`${API_URL}/${id}`, book);
