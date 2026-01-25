@@ -73,5 +73,12 @@ The application is designed with a **clean, professional UI** using **Bootstrap*
 
 ---
 
-##  Project Structure
+## 🖥 Backend / API Note
+This project uses JSON Server as a mock backend.
+
+To run the API locally:
+json-server --watch db.json --port 3001
+
+The frontend is deployed separately for demonstration purposes.
+
 
