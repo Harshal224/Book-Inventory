@@ -1,16 +1,77 @@
-# React + Vite
+# 📚 Book Inventory Management System (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##  Overview
+The **Book Inventory Management System** is a responsive web application built using **React** that allows users to manage a collection of books.  
+It supports full **CRUD operations** (Create, Read, Update, Delete) with real-time data handling via API integration.
 
-Currently, two official plugins are available:
+The application is designed with a **clean, professional UI** using **Bootstrap** and works seamlessly across **mobile, tablet, and laptop** devices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+##  Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+###  Home Page
+- Displays all books in a structured **table view**
+- Scrollable table with sticky header
+- Click on a book title to view detailed information
 
-## Expanding the ESLint configuration
+### ➕ Add Book
+- Add new books using a form
+- Proper **form validation**:
+  - Title & Author → required strings
+  - Age → integer only
+  - Email → valid email format
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+###  Edit Book
+- Edit existing book details
+- Form auto-fills selected book data
+- Cancel option to exit edit mode cleanly
+
+###  Delete Book
+- Delete books directly from the table
+- Data updates instantly after deletion
+
+###  Book Details Page
+- Displays complete book information:
+  - Author
+  - Publisher
+  - Published date
+  - Description
+- Scrollable content for long descriptions
+
+---
+
+##  API Integration
+- Uses **JSON Server** as a mock backend
+- All data operations are handled via REST APIs
+- API service layer implemented using **Axios**
+
+---
+
+##  Responsive Design
+- Mobile & Tablet → Single-column layout
+- Laptop & Desktop → Optimized wide layout
+- Fixed navbar at the top
+- Vertical scrolling enabled for tables
+
+---
+
+##  Tech Stack
+
+### Frontend
+- React (Vite)
+- React Router DOM
+- Bootstrap
+- Axios
+
+### Backend (Mock API)
+- JSON Server
+
+### Tools
+- Git & GitHub
+- VS Code
+
+---
+
+##  Project Structure
+

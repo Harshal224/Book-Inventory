@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/books";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/books";
+
 
 export const getBooks = () => axios.get(API_URL);
 
